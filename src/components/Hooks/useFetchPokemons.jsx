@@ -15,8 +15,8 @@ const useFetchPokemons = () => {
         Promise.all(fetchDetails).then((details) => {
           setPokemons(
               details.map((p) => ({
-              name: p.name,
-              image: p.sprites.front_default,
+              name: p.name.charAt(0).toUpperCase() + p.name.slice(1), // Primera letra en mayúscula
+              image: p.sprites.other["official-artwork"].front_default,
               type: p.types[0].type.name,
             })),
           );
@@ -28,3 +28,4 @@ const useFetchPokemons = () => {
 };
 
 export default useFetchPokemons;
+

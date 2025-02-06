@@ -5,6 +5,8 @@ import styles from "./styles";
 
 
 const NavBar = () => {
+
+  
   return (
     <nav className={styles.navbar}>
       {/* Lupa de búsqueda */}
@@ -14,9 +16,9 @@ const NavBar = () => {
 
       {/* Menú central */}
       <div className={styles.menu}>
-        <Link to="/" className={styles.menuItem}>Inicio</Link>
         <Link to="/about" className={styles.menuItem}>Quiénes Somos</Link>
-        <Link to="/login" className={styles.menuItem}>Iniciar Sesión / Registrarse</Link>
+        <Link to="/login" className={styles.menuItem}>Iniciar Sesión</Link>
+        <Link to="/signup" className={styles.menuItem}>Registrarse</Link>
       </div>
 
       {/* Carrito de compras */}
