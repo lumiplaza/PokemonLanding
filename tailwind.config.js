@@ -5,8 +5,8 @@ module.exports = {
   ],
   theme: {
     extend: {fontFamily: {
-      pokemon: ['Pokemon', 'sans-serif'],},
+      pokemon: ['Pokemon', 'sans-serif'],
+      comic: ['Comic Neue', 'sans-serif'],}},
   },
   plugins: [],
-},
 };

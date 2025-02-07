@@ -1,11 +1,17 @@
-import React from "react";
+//import { useState } from "react";
 import PokemonCard from "../PokemonCard";
 import useFetchPokemons from "../Hooks/useFetchPokemons";
 import styles from "./styles";
 
+
 const LandingPage = () => {
   const { pokemons, offset, setOffset } = useFetchPokemons();
+  // const [selectedPokemon, setSelectedPokemon] = useState(null);
   const limit = 36; // Cantidad de Pokémon por página
+  /* const displayedPokemons = selectedPokemon
+  ? pokemons.filter((p) => p.name === selectedPokemon)
+  : pokemons; */
+
 
   return (
     <div className={styles.container}>

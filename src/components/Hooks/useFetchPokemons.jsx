@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 
 const useFetchPokemons = () => {
   const [pokemons, setPokemons] = useState([]);
+  const [allPokemons, setAllPokemons] = useState([]);
   const [offset, setOffset] = useState(0);
-  const limit = 36; // Cantidad de Pokémon por página
+  const limit = 32; // Cantidad de Pokémon por página
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
@@ -22,10 +23,20 @@ const useFetchPokemons = () => {
           );
         });
       });
+    
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=1000")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllPokemons(data.results.map((p) => p.name));
+      });
   }, [offset]);
 
-  return { pokemons, setOffset, offset };
+  return { pokemons, allPokemons, setOffset, offset };
 };
 
 export default useFetchPokemons;
+
+
+
+  
 
