@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
-const useFetchPokemons = () => {
+export const PokemonContext = createContext();
+
+const PokemonProvider = ({ children }) => {
   const [pokemons, setPokemons] = useState([]);
   const [allPokemons, setAllPokemons] = useState([]);
   const [offset, setOffset] = useState(0);
-  const limit = 32; // Cantidad de Pokémon por página
+  const [searchName, setSearchName] = useState("");
+  const [searchCategory, setSearchCategory] = useState("");
+  const limit = 36;
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
@@ -15,15 +19,15 @@ const useFetchPokemons = () => {
         );
         Promise.all(fetchDetails).then((details) => {
           setPokemons(
-              details.map((p) => ({
-              name: p.name.charAt(0).toUpperCase() + p.name.slice(1), // Primera letra en mayúscula
+            details.map((p) => ({
+              name: p.name.charAt(0).toUpperCase() + p.name.slice(1),
               image: p.sprites.other["official-artwork"].front_default,
               type: p.types[0].type.name,
-            })),
+            }))
           );
         });
       });
-    
+
     fetch("https://pokeapi.co/api/v2/pokemon?limit=1000")
       .then((res) => res.json())
       .then((data) => {
@@ -31,12 +35,22 @@ const useFetchPokemons = () => {
       });
   }, [offset]);
 
-  return { pokemons, allPokemons, setOffset, offset };
+  return (
+    <PokemonContext.Provider
+      value={{
+        pokemons,
+        allPokemons,
+        offset,
+        setOffset,
+        searchName,
+        setSearchName,
+        searchCategory,
+        setSearchCategory,
+      }}
+    >
+      {children}
+    </PokemonContext.Provider>
+  );
 };
 
-export default useFetchPokemons;
-
-
-
-  
-
+export default PokemonProvider;
