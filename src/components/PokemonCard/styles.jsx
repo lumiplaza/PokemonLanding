@@ -5,6 +5,7 @@ const styles = {
     cardText: "text-sm text-gray-500",
     price: "text-lg font-semibold text-[#2c5839eb] mt-2",
     button: "mt-3 bg-[#55640feb] text-white font-bold py-2 px-4 rounded hover:bg-[#db9a20eb] transition",
+    
   };
   
   export default styles;

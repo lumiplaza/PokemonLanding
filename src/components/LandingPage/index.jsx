@@ -39,9 +39,7 @@ const LandingPage = ({ selectedPokemon } ) => {
         filteredPokemons.map((pokemon, index) => (
           <PokemonCard key={index} name={pokemon} image={pokemon.image}/>
         ))
-        ) : (
-          <p>No se encontró el Pokémon</p>
-        )}
+        ) : null}
       </div>
 
       {/* Contenedor de botones */}

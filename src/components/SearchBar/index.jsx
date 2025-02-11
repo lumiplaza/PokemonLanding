@@ -89,7 +89,7 @@ const SearchBar = ({ onPokemonSelect }) => {
           {filteredSuggestions.length > 0 && (
             <ul className={styles.suggestionsList}>
               {filteredSuggestions.map((name, index) => (
-                <li key={index} onClick={() => handleSelectSuggestion(name)}>
+                <li key={index} className={styles.suggestionItem} onClick={() => handleSelectSuggestion(name)}>
                   {name}
                 </li>
               ))}
