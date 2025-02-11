@@ -1,25 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 import PokemonCard from "../PokemonCard";
 import useFetchPokemons from "../../Hooks/useFetchPokemons";
 import styles from "./styles";
 
 
-const LandingPage = () => {
+const LandingPage = ({ selectedPokemon } ) => {
   const { pokemons, offset, setOffset } = useFetchPokemons();
-  const [selectedPokemon, setSelectedPokemon] = useState(null);
+  // const [selectedPokemon, setSelectedPokemon] = useState(null);
   const limit = 36; // Cantidad de Pokémon por página
   const displayedPokemons = selectedPokemon
   ? pokemons.filter((p) => p.name === selectedPokemon)
   : pokemons; 
 
+  const { allPokemons } = useFetchPokemons();
+  const [filteredPokemons, setFilteredPokemons] = useState([]);
+
+  useEffect(() => {
+    if (selectedPokemon) {
+      const result = allPokemons.filter((pokemon) => pokemon === selectedPokemon);
+      setFilteredPokemons(result);
+    } else {
+      setFilteredPokemons(allPokemons); // Muestra todos si no hay selección
+    }
+  }, [selectedPokemon, allPokemons]);
 
   return (
-    <div onPokemonSelect={setSelectedPokemon} className={styles.container}>
+    <div onPokemonSelect={selectedPokemon} className={styles.container}>
       <h1 className={styles.title}>Cartas de Pokémon</h1>
+      
       <div className={styles.grid}>
         {displayedPokemons.map((pokemon, index) => (
           <PokemonCard key={index} name={pokemon.name} image={pokemon.image} type={pokemon.type} />
         ))}
+      </div>
+
+      <div>
+        {selectedPokemon && filteredPokemons.length > 0 ? (
+        filteredPokemons.map((pokemon, index) => (
+          <PokemonCard key={index} name={pokemon} image={pokemon.image}/>
+        ))
+        ) : (
+          <p>No se encontró el Pokémon</p>
+        )}
       </div>
 
       {/* Contenedor de botones */}
