@@ -2,11 +2,13 @@ import { useState, useEffect  } from "react";
 import PokemonCard from "../PokemonCard";
 import useFetchPokemons from "../../Hooks/useFetchPokemons";
 import styles from "./styles";
+import PokemonCardFilter from "../PokemonCardFilter";
+
+
 
 
 const LandingPage = ({ selectedPokemon } ) => {
   const { pokemons, offset, setOffset } = useFetchPokemons();
-  // const [selectedPokemon, setSelectedPokemon] = useState(null);
   const limit = 36; // Cantidad de Pokémon por página
   const displayedPokemons = selectedPokemon
   ? pokemons.filter((p) => p.name === selectedPokemon)
@@ -24,6 +26,8 @@ const LandingPage = ({ selectedPokemon } ) => {
     }
   }, [selectedPokemon, allPokemons]);
 
+
+
   return (
     <div onPokemonSelect={selectedPokemon} className={styles.container}>
       <h1 className={styles.title}>Cartas de Pokémon</h1>
@@ -37,11 +41,13 @@ const LandingPage = ({ selectedPokemon } ) => {
       <div>
         {selectedPokemon && filteredPokemons.length > 0 ? (
         filteredPokemons.map((pokemon, index) => (
-          <PokemonCard key={index} name={pokemon} image={pokemon.image}/>
+          <PokemonCardFilter key={selectedPokemon} name={selectedPokemon} image={pokemon.image}/>
         ))
-        ) : null}
+        ) : null }
       </div>
 
+      
+      
       {/* Contenedor de botones */}
       <div className="flex justify-center gap-4 mt-6">
         {/* Botón "Anterior" */}

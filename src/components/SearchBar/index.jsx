@@ -55,22 +55,9 @@ const SearchBar = ({ onPokemonSelect }) => {
     setFilteredSuggestions([]); // Oculta las sugerencias
     onPokemonSelect(pokemonName); // Envía el nombre del Pokémon seleccionado
   }; 
+
   
-
- /* const handleSelectPokemon = async (name) => {
-    try {
-      // Hacemos una petición a la API para obtener la información del Pokémon
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      const data = await response.json();
   
-      // Extraemos el ID y lo guardamos en el estado
-      setSelectedPokemon({ id: data.id, name: data.name });
-    } catch (error) {
-      console.error("Error al obtener los datos del Pokémon:", error);
-    }
-  }; */
-
-
 
   return (
     <div ref={searchRef} className={styles.searchContainer}>

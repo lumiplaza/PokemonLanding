@@ -3,6 +3,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import styles from "./styles";
 import SearchBar from "../SearchBar";
 
+
+
 const NavBar = ({ onPokemonSelect, allPokemonNames }) => {
   return (
     <nav className={styles.navbar}>
