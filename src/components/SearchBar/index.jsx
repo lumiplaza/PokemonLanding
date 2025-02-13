@@ -1,13 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import styles from "./styles";
-import CategorySelect from "../CategorySelect";
 import useFetchPokemons from "../../Hooks/useFetchPokemons";
 
 const SearchBar = ({ onPokemonSelect }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchName, setSearchName] = useState("");
-  const [searchCategory, setSearchCategory] = useState("");
+  // const [searchCategory, setSearchCategory] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const searchRef = useRef(null);
   
@@ -50,11 +49,19 @@ const SearchBar = ({ onPokemonSelect }) => {
     }
   }; 
 
+// Manejar la selección de una sugerencia
   const handleSelectSuggestion = (pokemonName) => {
     setSearchName(pokemonName); // Actualiza el input con el nombre seleccionado
     setFilteredSuggestions([]); // Oculta las sugerencias
     onPokemonSelect(pokemonName); // Envía el nombre del Pokémon seleccionado
   }; 
+
+   // Manejar el cambio de categoría
+   /* const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    setSearchCategory(category);
+    // Aquí puedes agregar la lógica para filtrar los Pokémon por categoría
+  }; */
 
   
   
@@ -82,10 +89,7 @@ const SearchBar = ({ onPokemonSelect }) => {
               ))}
             </ul>
           )}
-          <CategorySelect
-            value={searchCategory}
-            onChange={(e) => setSearchCategory(e.target.value)}
-          />
+          
           <button onClick={() => onPokemonSelect(searchName)} className={styles.searchButton}>
             Buscar
           </button>

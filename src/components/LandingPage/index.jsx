@@ -6,7 +6,6 @@ import PokemonCardFilter from "../PokemonCardFilter";
 
 
 
-
 const LandingPage = ({ selectedPokemon } ) => {
   const { pokemons, offset, setOffset } = useFetchPokemons();
   const limit = 36; // Cantidad de Pokémon por página
@@ -16,6 +15,7 @@ const LandingPage = ({ selectedPokemon } ) => {
 
   const { allPokemons } = useFetchPokemons();
   const [filteredPokemons, setFilteredPokemons] = useState([]);
+  
 
   useEffect(() => {
     if (selectedPokemon) {
@@ -46,8 +46,7 @@ const LandingPage = ({ selectedPokemon } ) => {
         ) : null }
       </div>
 
-      
-      
+
       {/* Contenedor de botones */}
       <div className="flex justify-center gap-4 mt-6">
         {/* Botón "Anterior" */}
