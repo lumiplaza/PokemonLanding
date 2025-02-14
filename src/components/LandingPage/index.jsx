@@ -6,12 +6,14 @@ import PokemonCardFilter from "../PokemonCardFilter";
 
 
 
+
 const LandingPage = ({ selectedPokemon, setSelectedPokemon  }) => {
   const { pokemons, offset, setOffset } = useFetchPokemons();
   const limit = 36; // Cantidad de Pokémon por página
   const displayedPokemons = selectedPokemon
   ? pokemons.filter((p) => p.name === selectedPokemon)
   : pokemons; 
+  
 
   const { allPokemons } = useFetchPokemons();
   const [filteredPokemons, setFilteredPokemons] = useState([]);

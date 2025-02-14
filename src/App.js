@@ -1,4 +1,5 @@
-import { BrowserRouter as Router } from "react-router-dom";
+// import { BrowserRouter as Router } from "react-router-dom";
+import PokemonProvider from "./context/PokemonContext";
 import "./index.css";
 
 import { useState } from "react";
@@ -6,7 +7,7 @@ import { useState } from "react";
 import NavBar from "./components/NavBar";
 import LandingPage from "./components/LandingPage";
 import Footer from "./components/Footer";
-
+import Cart from "./components/Cart";
 
 
 function App() {
@@ -14,11 +15,12 @@ function App() {
  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   return (
-    <Router>
+    <PokemonProvider>
       <NavBar onPokemonSelect={setSelectedPokemon} />
       <LandingPage selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon}  />
       <Footer />
-    </Router>
+      <Cart />
+    </PokemonProvider>
   );
 }
 

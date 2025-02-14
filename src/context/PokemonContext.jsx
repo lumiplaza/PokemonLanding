@@ -8,6 +8,7 @@ const PokemonProvider = ({ children }) => {
   const [offset, setOffset] = useState(0);
   const [searchName, setSearchName] = useState("");
   const [searchCategory, setSearchCategory] = useState("");
+  const [cart, setCart] = useState([]); // Estado del carrito
   const limit = 36;
 
   useEffect(() => {
@@ -35,6 +36,23 @@ const PokemonProvider = ({ children }) => {
       });
   }, [offset]);
 
+  // Función para agregar Pokémon al carrito
+  const addToCart = (pokemon) => {
+    if (!pokemon || !pokemon.name || !pokemon.image) {
+      console.error("Intentando agregar un Pokémon inválido al carrito:", pokemon);
+      return;
+    }
+
+    setCart((prevCart) => [...prevCart, pokemon]);
+  };
+
+  // Función para eliminar un Pokémon del carrito
+  const removeFromCart = (pokemonName) => {
+    setCart((prevCart) => prevCart.filter((p) => p.name !== pokemonName));
+  };
+
+
+
   return (
     <PokemonContext.Provider
       value={{
@@ -46,6 +64,9 @@ const PokemonProvider = ({ children }) => {
         setSearchName,
         searchCategory,
         setSearchCategory,
+        cart,
+        addToCart,
+        removeFromCart,
       }}
     >
       {children}

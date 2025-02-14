@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles";
+import { useContext } from "react";
+import { PokemonContext } from "../../context/PokemonContext";
 
 
 
-const PokemonCard = ({ name, image, type }) => {
+const PokemonCard = ({ name, image, type  }) => {
   const [price, setPrice] = useState(0);
   const [id, setId] = useState(null);
+
+  const { addToCart } = useContext(PokemonContext); // agregar al carrito
 
   
 /*Genera un precio aleatorio para cada carta y la lamcena en localstorage*/
@@ -48,7 +52,7 @@ const PokemonCard = ({ name, image, type }) => {
       <img src={image} alt={"Imagen del pokemon"} className={styles.image}  />
       <p className={styles.cardText}>Tipo: {type}</p>
       <p className={styles.price}>Precio: ${price}</p>
-      <button className={styles.button}>Add to cart</button>
+      <button onClick={() => addToCart({ name, image, type })} className={styles.button}>Add to cart</button>
     </div>
   );
 };
