@@ -14,9 +14,13 @@ module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
 
   theme: {
-    extend: {fontFamily: {
-      pokemon: ['Pokemon', 'sans-serif'],
-      comic: ['Comic Neue', 'sans-serif'],}},
+    extend: {
+      colors: {
+        colorsearchbox: "#0e292d",
+      },
+      fontFamily: {
+        pokemon: ['Pokemon', 'sans-serif'],
+        comic: ['Comic Neue', 'sans-serif'],}},
   },
   plugins: [],
 };

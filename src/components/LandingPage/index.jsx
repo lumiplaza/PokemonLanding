@@ -6,7 +6,7 @@ import PokemonCardFilter from "../PokemonCardFilter";
 
 
 
-const LandingPage = ({ selectedPokemon } ) => {
+const LandingPage = ({ selectedPokemon, setSelectedPokemon  }) => {
   const { pokemons, offset, setOffset } = useFetchPokemons();
   const limit = 36; // Cantidad de Pokémon por página
   const displayedPokemons = selectedPokemon
@@ -15,6 +15,7 @@ const LandingPage = ({ selectedPokemon } ) => {
 
   const { allPokemons } = useFetchPokemons();
   const [filteredPokemons, setFilteredPokemons] = useState([]);
+  
   
 
   useEffect(() => {
@@ -39,15 +40,29 @@ const LandingPage = ({ selectedPokemon } ) => {
       </div>
 
       <div>
-        {selectedPokemon && filteredPokemons.length > 0 ? (
-        filteredPokemons.map((pokemon, index) => (
-          <PokemonCardFilter key={selectedPokemon} name={selectedPokemon} image={pokemon.image}/>
-        ))
-        ) : null }
-      </div>
+      {selectedPokemon && filteredPokemons.length > 0 ? (
+        <>
+          {filteredPokemons.map((pokemon, index) => (
+            <PokemonCardFilter key={selectedPokemon} name={selectedPokemon} image={pokemon.image} />
+          ))}
+          
+          {/* Botón para volver al listado */}
+          <div className="flex justify-center mt-6">
+            <button 
+              className={styles.buttonBack}
+              onClick={() => setSelectedPokemon(null)}
+            >
+              Volver al Listado
+            </button>
+          </div>
+        </>
+      ) : null}
+    </div>
 
 
-      {/* Contenedor de botones */}
+      {/* Contenedor de botones   // solo se muestra si NO hay un Pokémon seleccionado */}
+   
+      {!selectedPokemon && (
       <div className="flex justify-center gap-4 mt-6">
         {/* Botón "Anterior" */}
         <button
@@ -66,6 +81,7 @@ const LandingPage = ({ selectedPokemon } ) => {
           Ver más Pokémon
         </button>
       </div>
+      )}
     </div>
   );
 };

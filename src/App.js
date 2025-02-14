@@ -11,12 +11,12 @@ import Footer from "./components/Footer";
 
 function App() {
 
- const [selectedPokemon, setSelectedPokemon] = useState("");
+ const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   return (
     <Router>
       <NavBar onPokemonSelect={setSelectedPokemon} />
-      <LandingPage selectedPokemon={selectedPokemon} />
+      <LandingPage selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon}  />
       <Footer />
     </Router>
   );

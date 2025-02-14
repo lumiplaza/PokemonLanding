@@ -6,7 +6,7 @@ import useFetchPokemons from "../../Hooks/useFetchPokemons";
 const SearchBar = ({ onPokemonSelect }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchName, setSearchName] = useState("");
-  // const [searchCategory, setSearchCategory] = useState("");
+  //const [searchCategory, setSearchCategory] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const searchRef = useRef(null);
   
