@@ -2,18 +2,23 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles";
 import { useContext } from "react";
 import { PokemonContext } from "../../context/PokemonContext";
+import { usePokemonPrice } from "../../context/PokemonPriceProvider";
+// import PokemonPrice from "../PokemonPrice";
 
 
 
-const PokemonCard = ({ name, image, type  }) => {
-  const [price, setPrice] = useState(0);
+const PokemonCard = ({ name, image, type, pokemonName  }) => {
+ // const [price, setPrice] = useState(0);
   const [id, setId] = useState(null);
-
   const { addToCart } = useContext(PokemonContext); // agregar al carrito
+
+  const { getPokemonPrice } = usePokemonPrice();
+  const price = getPokemonPrice(name);
+
 
   
 /*Genera un precio aleatorio para cada carta y la lamcena en localstorage*/
-  useEffect(() => {
+/*  useEffect(() => {
     const storedPrices = JSON.parse(localStorage.getItem("pokemon_prices")) || {}; // Obtener precios guardados
   
     if (storedPrices[name]) {
@@ -24,7 +29,7 @@ const PokemonCard = ({ name, image, type  }) => {
       localStorage.setItem("pokemon_prices", JSON.stringify(storedPrices)); // Guardar en localStorage
       setPrice(newPrice);
     }
-  }, [name]); // Se ejecuta cada vez que cambia el nombre del Pokémon
+  }, [name]); // Se ejecuta cada vez que cambia el nombre del Pokémon */
   
 
 
@@ -43,7 +48,7 @@ const PokemonCard = ({ name, image, type  }) => {
     fetchPokemonId();
   }, [name]);
 
-  if (!id) return <p>Cargando...</p>; // Evita renderizar si aún no tiene el ID
+  if (!id) return <p>Loading...</p>; // Evita renderizar si aún no tiene el ID
 
 
   return (

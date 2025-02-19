@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext  } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import styles from "./styles";
 import SearchBar from "../SearchBar";
@@ -6,6 +6,7 @@ import Modal from "../Modal";
 import AboutUs from "../AboutUs";
 import RegisterForm from "../RegisterForm";
 import SesionSign from "../SesionSign";
+import { PokemonContext } from "../../context/PokemonContext";
 
 
 const NavBar = ({ onPokemonSelect, allPokemonNames }) => {
@@ -22,6 +23,7 @@ const NavBar = ({ onPokemonSelect, allPokemonNames }) => {
     setSelectedComponent(null); // Limpia el componente seleccionado
   };
   
+  const { toggleCartContent } = useContext(PokemonContext);
 
   
   return (
@@ -64,7 +66,9 @@ const NavBar = ({ onPokemonSelect, allPokemonNames }) => {
       </div>
 
       <div className={styles.cart}>
+        <button onClick={toggleCartContent} className="relative">
         <FaShoppingCart />
+        </button>
       </div>
     </nav>
   );

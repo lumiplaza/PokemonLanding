@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 
 function PricePokemon({ pokemons }) {
     return (
@@ -18,4 +18,4 @@ function PricePokemon({ pokemons }) {
     );
 }
 
-export default PricePokemon;
+export default PricePokemon;*/

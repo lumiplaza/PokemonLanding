@@ -37,7 +37,7 @@ const LandingPage = ({ selectedPokemon, setSelectedPokemon  }) => {
       
       <div className={styles.grid}>
         {displayedPokemons.map((pokemon, index) => (
-          <PokemonCard key={index} name={pokemon.name} image={pokemon.image} type={pokemon.type} />
+          <PokemonCard key={index} name={pokemon.name} pokemonName={pokemon.name} image={pokemon.image} type={pokemon.type} />
         ))}
       </div>
 
@@ -45,7 +45,7 @@ const LandingPage = ({ selectedPokemon, setSelectedPokemon  }) => {
       {selectedPokemon && filteredPokemons.length > 0 ? (
         <>
           {filteredPokemons.map((pokemon, index) => (
-            <PokemonCardFilter key={selectedPokemon} name={selectedPokemon} image={pokemon.image} />
+            <PokemonCardFilter key={selectedPokemon} name={selectedPokemon} pokemonName={pokemon.name} image={pokemon.image} />
           ))}
           
           {/* Botón para volver al listado */}
