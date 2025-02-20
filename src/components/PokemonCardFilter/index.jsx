@@ -3,14 +3,14 @@ import styles from "./styles";
 import { usePokemonPrice } from "../../context/PokemonPriceProvider";
 //import PokemonPrice from "../PokemonPrice";
 
-const PokemonCardFilter = ({ name, pokemonName }) => {
+const PokemonCardFilter = ({ name }) => {
   
   const [image, setImage] = useState(null); // Para guardar la URL de la imagen
   const [types, setTypes] = useState([]); // Para guardar los tipos (puede ser un array)
- // const [price, setPrice] = useState(null);
+  const [price, setPrice] = useState(null);
 
  const { getPokemonPrice } = usePokemonPrice();
-  const price = getPokemonPrice(pokemonName);
+  // const price = getPokemonPrice(name);
 
   /*Genera un precio aleatorio para cada carta y la lamcena en localstorage*/
   /* useEffect(() => {
@@ -46,6 +46,13 @@ const PokemonCardFilter = ({ name, pokemonName }) => {
   
     fetchPokemonData();
   }, [name]); // Se ejecuta cada vez que `name` cambia
+
+  useEffect(() => {
+    if (name) {
+      const pokemonPrice = getPokemonPrice(name);
+      setPrice(pokemonPrice);
+    }
+  }, [name, getPokemonPrice]);
 
 
 

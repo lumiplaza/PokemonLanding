@@ -7,7 +7,7 @@ import { usePokemonPrice } from "../../context/PokemonPriceProvider";
 
 
 
-const PokemonCard = ({ name, image, type, pokemonName  }) => {
+const PokemonCard = ({ name, image, type  }) => {
  // const [price, setPrice] = useState(0);
   const [id, setId] = useState(null);
   const { addToCart } = useContext(PokemonContext); // agregar al carrito
