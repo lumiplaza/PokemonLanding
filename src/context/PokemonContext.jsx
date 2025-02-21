@@ -1,6 +1,14 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext  } from "react";
 
 export const PokemonContext = createContext();
+
+export const useCart = () => {
+  const context = useContext(PokemonContext);
+  if (!context) {
+    throw new Error("useCart debe usarse dentro de un PokemonProvider");
+  }
+  return context;
+};
 
 const PokemonProvider = ({ children }) => {
   const [pokemons, setPokemons] = useState([]);
@@ -50,9 +58,16 @@ const PokemonProvider = ({ children }) => {
   };
 
   // Función para eliminar un Pokémon del carrito
-  const removeFromCart = (pokemonName) => {
-    setCart((prevCart) => prevCart.filter((p) => p.name !== pokemonName));
-  };
+    const removeFromCart = (pokemonName) => {
+      setCart((prevCart) => {
+        const indexToRemove = prevCart.findIndex((p) => p.name === pokemonName);
+        if (indexToRemove === -1) return prevCart; // Si no encuentra, retorna el mismo carrito
+    
+        const newCart = [...prevCart];
+        newCart.splice(indexToRemove, 1); // Elimina solo un elemento con ese nombre
+        return newCart;
+      });
+    };
 
   // Modal del carrito
   const toggleCartContent = () => {

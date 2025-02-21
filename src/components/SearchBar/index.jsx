@@ -3,15 +3,29 @@ import { FaSearch } from "react-icons/fa";
 import styles from "./styles";
 import useFetchPokemons from "../../Hooks/useFetchPokemons";
 
-const SearchBar = ({ onPokemonSelect }) => {
+const SearchBar = ({ onPokemonSelect, onCategorySelect  }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchName, setSearchName] = useState("");
   //const [searchCategory, setSearchCategory] = useState("");
+  const [showCategories, setShowCategories] = useState(false);
+  const [categories, setCategories] = useState([]);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const searchRef = useRef(null);
   
 
   const { allPokemons } = useFetchPokemons();
+
+   // Obtener las categorías únicas al cargar el componente
+   useEffect(() => {
+    if (Array.isArray(allPokemons)) {
+      const uniqueCategories = [
+        ...new Set(allPokemons.map((pokemon) =>  pokemon.type && pokemon.type.toLowerCase()) // Verifica que tenga "type"
+        .filter(Boolean) // Filtra los undefined/null];
+      ),
+    ];
+      setCategories(uniqueCategories);
+    }
+  }, [allPokemons]);
 
   // clic afuera de la barra para cerrarla
 
@@ -19,6 +33,7 @@ const SearchBar = ({ onPokemonSelect }) => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowSearch(false);
+        setShowCategories(false);
       }
     };
 
@@ -29,10 +44,23 @@ const SearchBar = ({ onPokemonSelect }) => {
   }, []);
 
   // Lupa visible o no
-
-  const handleSearchClick = () => {
+    const handleSearchClick = () => {
     setShowSearch(!showSearch);
   };
+
+  // Manejar clic fuera del input para cerrar la barra
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSearch(false);
+        setShowCategories(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
 
   // Manejar el cambio en el input
@@ -63,9 +91,20 @@ const SearchBar = ({ onPokemonSelect }) => {
     // Aquí puedes agregar la lógica para filtrar los Pokémon por categoría
   }; */
 
-  
-  
+   // Mostrar categorías al hacer clic en el botón
+   const handleShowCategories = () => {
+    setShowCategories(!showCategories);
+  };
 
+  // Manejar la selección de una categoría
+  const handleSelectCategory = (category) => {
+    setShowCategories(false); // Ocultar la lista
+    onCategorySelect(category); // Filtrar los Pokémon por categoría
+  };
+
+
+  
+  
   return (
     <div ref={searchRef} className={styles.searchContainer}>
       {!showSearch && (
@@ -89,9 +128,19 @@ const SearchBar = ({ onPokemonSelect }) => {
               ))}
             </ul>
           )}
+
+          {showCategories && (
+            <ul className={styles.suggestionsList}>
+              {categories.map((category, index) => (
+                <li key={index} className={styles.suggestionItem} onClick={() => handleSelectCategory(category)}>
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                </li>
+              ))}
+            </ul>
+          )}  
           
-          <button onClick={() => onPokemonSelect(searchName)} className={styles.searchButton}>
-            Buscar
+          <button onClick={handleShowCategories} className={styles.searchButton}>
+            Ver Categorias
           </button>
         </div>
       )}

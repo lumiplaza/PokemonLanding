@@ -1,8 +1,12 @@
 import { useContext } from "react";
 import { PokemonContext } from "../../context/PokemonContext";
+import { usePokemonPrice } from "../../context/PokemonPriceProvider";
 
 const Cart = () => {
+  
   const { cart, removeFromCart, showCartContent, toggleCartContent } = useContext(PokemonContext);
+  const { getPokemonPrice } = usePokemonPrice();
+
 
   return (
     <>
@@ -26,6 +30,7 @@ const Cart = () => {
                   <li key={index} className="flex items-center gap-2 border-b p-2">
                     <img src={pokemon.image} alt={pokemon.name} className="w-12 h-12" />
                     <span>{pokemon.name}</span>
+                    <p> Precio: ${getPokemonPrice(pokemon.name)}</p>
                     <button
                         className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-700"
                         onClick={() => removeFromCart(pokemon.name)}>

@@ -7,6 +7,7 @@ import AboutUs from "../AboutUs";
 import RegisterForm from "../RegisterForm";
 import SesionSign from "../SesionSign";
 import { PokemonContext } from "../../context/PokemonContext";
+import { useCart } from "../../context/PokemonContext";
 
 
 const NavBar = ({ onPokemonSelect, allPokemonNames }) => {
@@ -24,6 +25,10 @@ const NavBar = ({ onPokemonSelect, allPokemonNames }) => {
   };
   
   const { toggleCartContent } = useContext(PokemonContext);
+
+  // contador items cart
+  const { cart } = useCart();
+  const cartCount = cart?.length ?? 0;
 
   
   return (
@@ -68,6 +73,12 @@ const NavBar = ({ onPokemonSelect, allPokemonNames }) => {
       <div className={styles.cart}>
         <button onClick={toggleCartContent} className="relative">
         <FaShoppingCart />
+        {/* Círculo rojo con el número de elementos */}
+          {cartCount > 0 && (
+            <span className="absolute -top-1 -right-2 bg-red-500 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              {cartCount}
+            </span>
+          )}
         </button>
       </div>
     </nav>
