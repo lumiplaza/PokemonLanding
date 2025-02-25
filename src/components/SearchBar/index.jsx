@@ -84,18 +84,7 @@ const SearchBar = ({ onPokemonSelect, onCategorySelect  }) => {
     onPokemonSelect(pokemonName); // Envía el nombre del Pokémon seleccionado
   }; 
 
-   // Manejar el cambio de categoría
-   /* const handleCategoryChange = (e) => {
-    const category = e.target.value;
-    setSearchCategory(category);
-    // Aquí puedes agregar la lógica para filtrar los Pokémon por categoría
-  }; */
-
-   // Mostrar categorías al hacer clic en el botón
-   const handleShowCategories = () => {
-    setShowCategories(!showCategories);
-  };
-
+  
   // Manejar la selección de una categoría
   const handleSelectCategory = (category) => {
     setShowCategories(false); // Ocultar la lista
@@ -139,9 +128,7 @@ const SearchBar = ({ onPokemonSelect, onCategorySelect  }) => {
             </ul>
           )}  
           
-          <button onClick={handleShowCategories} className={styles.searchButton}>
-            Ver Categorias
-          </button>
+          
         </div>
       )}
     </div>

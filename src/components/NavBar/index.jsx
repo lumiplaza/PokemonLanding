@@ -75,7 +75,7 @@ const NavBar = ({ onPokemonSelect, allPokemonNames }) => {
         <FaShoppingCart />
         {/* Círculo rojo con el número de elementos */}
           {cartCount > 0 && (
-            <span className="absolute -top-1 -right-2 bg-red-500 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+            <span className="absolute -top-1 -right-2 bg-red-400 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
               {cartCount}
             </span>
           )}
