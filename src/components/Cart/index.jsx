@@ -1,6 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { PokemonContext } from "../../context/PokemonContext";
 import { usePokemonPrice } from "../../context/PokemonPriceProvider";
+import Modal from "../Modal";
+import CreditCardData from "../CreditCardData";
+
 
 const Cart = () => {
   const { cart, removeFromCart, showCartContent, toggleCartContent } = useContext(PokemonContext);
@@ -8,6 +11,19 @@ const Cart = () => {
 
   // Calcular el total sumando los precios de los Pokémon en el carrito
   const totalPrice = cart.reduce((total, pokemon) => total + (getPokemonPrice(pokemon.name) || 0), 0);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedComponent, setSelectedComponent] = useState(null);
+  
+  const openModal = (component) => {
+    setSelectedComponent(component); // Establece el componente a mostrar
+    setIsModalOpen(true); // Abre el modal
+  };
+  const closeModal = () => {
+    setIsModalOpen(false); // Cierra el modal
+    setSelectedComponent(null); // Limpia el componente seleccionado
+  };
+
 
   return (
     <>
@@ -58,10 +74,15 @@ const Cart = () => {
                 {/* Botón Ir a pagar */}
                 <button
                   className="w-full mt-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-800 transition-all shadow-md"
-                  onClick={() => alert('Redirigiendo a pago...')}
+                  onClick={() => openModal("CreditCardData")}
                 >
                   Ir a pagar
                 </button>
+
+                <Modal isOpen={isModalOpen} onClose={closeModal}>
+                  {selectedComponent === "CreditCardData" && <CreditCardData />}
+                </Modal>
+
               </div>
             )}
           </div>
