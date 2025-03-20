@@ -1,4 +1,4 @@
-// import { BrowserRouter as Router } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Routes  } from "react-router-dom";
 import PokemonProvider from "./context/PokemonContext";
 import { PokemonPriceProvider } from "./context/PokemonPriceProvider";
 import "./index.css";
@@ -17,7 +17,7 @@ function App() {
  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   return (
-    <PokemonProvider>
+    <PokemonProvider basename="/PokemonLanding">
     <PokemonPriceProvider>
       <NavBar onPokemonSelect={setSelectedPokemon} />
       <LandingPage selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon}  />
