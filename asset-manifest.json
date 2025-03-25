@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/PokemonLanding/static/css/main.2bc6bb75.css",
+    "main.js": "/PokemonLanding/static/js/main.4ac5c5b7.js",
+    "static/media/Pokemon Solid.ttf": "/PokemonLanding/static/media/Pokemon Solid.5d60be1f7ff5fcc21fc1.ttf",
+    "index.html": "/PokemonLanding/index.html",
+    "main.2bc6bb75.css.map": "/PokemonLanding/static/css/main.2bc6bb75.css.map",
+    "main.4ac5c5b7.js.map": "/PokemonLanding/static/js/main.4ac5c5b7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2bc6bb75.css",
+    "static/js/main.4ac5c5b7.js"
+  ]
+}
