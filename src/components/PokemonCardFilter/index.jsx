@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import styles from "./styles";
 import { usePokemonPrice } from "../../context/PokemonPriceProvider";
 import { PokemonContext } from "../../context/PokemonContext";
-//import PokemonPrice from "../PokemonPrice";
+
 
 const PokemonCardFilter = ({ name }) => {
   
@@ -10,8 +10,7 @@ const PokemonCardFilter = ({ name }) => {
   const [types, setTypes] = useState([]); // Para guardar los tipos (puede ser un array)
   const [price, setPrice] = useState(null);
   const { addToCart } = useContext(PokemonContext); // agregar al carrito
-
- const { getPokemonPrice } = usePokemonPrice();
+  const { getPokemonPrice } = usePokemonPrice();
   
 
   useEffect(() => {
@@ -19,22 +18,18 @@ const PokemonCardFilter = ({ name }) => {
       try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
         const data = await response.json();
-  
-        
         const image = data.sprites.other["official-artwork"].front_default; // Imagen de alta calidad
         const types = data.types.map((typeInfo) => typeInfo.type.name);
-  
-        
         setImage(image);
         setTypes(types);
       } catch (error) {
         console.error("Error obteniendo los datos del Pokémon:", error);
       }
     };
-  
     fetchPokemonData();
   }, [name]); // Se ejecuta cada vez que `name` cambia
 
+  
   useEffect(() => {
     if (name) {
       const pokemonPrice = getPokemonPrice(name);
@@ -43,6 +38,7 @@ const PokemonCardFilter = ({ name }) => {
   }, [name, getPokemonPrice]);
 
 
+  
 
   return (
     <div className={styles.card}>

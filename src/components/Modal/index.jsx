@@ -9,7 +9,10 @@ const Modal = ({ isOpen, onClose, children }) => {
         {/* Botón de cierre */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-5xl 
+             transition-all duration-200 ease-in-out 
+             drop-shadow-md hover:drop-shadow-lg
+             hover:scale-105 active:scale-95"
         >
           &times;
         </button>

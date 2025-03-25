@@ -6,29 +6,27 @@ import useFetchPokemons from "../../Hooks/useFetchPokemons";
 const SearchBar = ({ onPokemonSelect, onCategorySelect  }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchName, setSearchName] = useState("");
-  //const [searchCategory, setSearchCategory] = useState("");
   const [showCategories, setShowCategories] = useState(false);
   const [categories, setCategories] = useState([]);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const searchRef = useRef(null);
   
-
   const { allPokemons } = useFetchPokemons();
 
    // Obtener las categorías únicas al cargar el componente
-   useEffect(() => {
+  useEffect(() => {
     if (Array.isArray(allPokemons)) {
       const uniqueCategories = [
         ...new Set(allPokemons.map((pokemon) =>  pokemon.type && pokemon.type.toLowerCase()) // Verifica que tenga "type"
         .filter(Boolean) // Filtra los undefined/null];
-      ),
-    ];
+        ),
+      ];
       setCategories(uniqueCategories);
     }
   }, [allPokemons]);
 
+  
   // clic afuera de la barra para cerrarla
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -36,18 +34,19 @@ const SearchBar = ({ onPokemonSelect, onCategorySelect  }) => {
         setShowCategories(false);
       }
     };
-
-    document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
+  
   // Lupa visible o no
-    const handleSearchClick = () => {
-    setShowSearch(!showSearch);
+  const handleSearchClick = () => {
+  setShowSearch(!showSearch);
   };
 
+  
   // Manejar clic fuera del input para cerrar la barra
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -64,10 +63,9 @@ const SearchBar = ({ onPokemonSelect, onCategorySelect  }) => {
 
 
   // Manejar el cambio en el input
-   const handleSearchChange = (e) => {
+  const handleSearchChange = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchName(value);
-
     // Asegurar que `allPokemons` es un array antes de filtrar
     if (Array.isArray(allPokemons)) {
       const suggestions = allPokemons.filter((pokemon) =>
@@ -127,8 +125,6 @@ const SearchBar = ({ onPokemonSelect, onCategorySelect  }) => {
               ))}
             </ul>
           )}  
-          
-          
         </div>
       )}
     </div>

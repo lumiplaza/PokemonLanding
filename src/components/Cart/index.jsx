@@ -1,16 +1,20 @@
 import { useContext, useState } from "react";
+
 import { PokemonContext } from "../../context/PokemonContext";
 import { usePokemonPrice } from "../../context/PokemonPriceProvider";
+
 import Modal from "../Modal";
 import CreditCardData from "../CreditCardData";
 
 
 const Cart = () => {
+  
   const { cart, removeFromCart, showCartContent, toggleCartContent } = useContext(PokemonContext);
   const { getPokemonPrice } = usePokemonPrice();
 
   // Calcular el total sumando los precios de los Pokémon en el carrito
   const totalPrice = cart.reduce((total, pokemon) => total + (getPokemonPrice(pokemon.name) || 0), 0);
+  
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -25,11 +29,14 @@ const Cart = () => {
   };
 
 
+  
+
   return (
     <>
       {showCartContent && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-gradient-to-br from-indigo-100 to-purple-200 p-6 rounded-lg shadow-xl w-96 relative border border-indigo-300">
+            
             {/* Botón para cerrar el modal */}
             <button 
               onClick={toggleCartContent} 

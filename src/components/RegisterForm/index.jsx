@@ -1,8 +1,9 @@
 import React from "react";
 
+
 const RegisterForm = () => {
   return (
-    <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 pt-4">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
           Regístrate en <strong className="text-purple-600">PokéDex</strong>
@@ -81,6 +82,7 @@ const RegisterForm = () => {
       </div>
     </div>
   );
+  
 };
 
 export default RegisterForm; 
